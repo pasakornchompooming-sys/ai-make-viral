@@ -1,74 +1,43 @@
-import React from 'react';
-import { Sparkles, Zap, Smartphone, ArrowRight, Clock } from 'lucide-react';
-
-const FeatureCard = ({ icon: Icon, title, description }) => (
-    <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-brand-purple transition-all duration-300 shadow-lg">
-        <Icon size={32} className="text-brand-pink mb-3" />
-        <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-gray-400">{description}</p>
-    </div>
-);
-
-const LandingPage = ({ onStart, user }) => {
+// --- Component: Landing Page (แก้ไข) ---
+// 🔑 รับ prop onGoogleLogin เข้ามา
+export default function LandingPage({ onGoogleLogin }) { 
+    
+    // ... (ลบฟังก์ชัน handleLogin() เดิมออก)
+    
     return (
-        <div className="min-h-screen bg-dark-bg font-sans text-gray-100 flex flex-col items-center justify-center p-4">
-            <div className="max-w-4xl mx-auto text-center py-20">
-                
-                {/* Header Section */}
-                <header className="mb-12">
-                    <h1 className="text-6xl sm:text-7xl font-extrabold tracking-tight mb-4">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-pink to-brand-purple">
-                            AI CONTENT FACTORY
-                        </span>
-                    </h1>
-                    <p className="text-xl text-gray-300 font-light max-w-2xl mx-auto">
-                        สร้างสคริปต์วิดีโอสั้น (Short-Form) คุณภาพสูง
-                        ที่พร้อมให้คุณถ่ายทำได้ทันทีในไม่กี่วินาที
-                    </p>
-                </header>
+        <div className="flex h-screen bg-white">
+            {/* ... คอลัมน์ซ้าย (Banner) ... */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8">
+                <div className="w-full max-w-sm">
+                    
+                    {/* ... ส่วนหัวข้อ ... */}
 
-                {/* Call to Action Button */}
-                <button 
-                    onClick={onStart} 
-                    className="bg-gradient-to-r from-brand-pink to-brand-purple text-white px-10 py-4 rounded-full text-xl font-bold shadow-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-brand-purple/50 flex items-center justify-center gap-3 mx-auto"
-                >
-                    <Zap size={24} /> 
-                    {user ? "เข้าสู่ระบบ (Go to App)" : "เริ่มต้นสร้างคอนเทนต์ (Login)"}
-                    <ArrowRight size={20} />
-                </button>
-                <p className="text-sm text-gray-500 mt-4">ทดลองใช้ฟรี 10 เครดิต!</p>
-
-                {/* Features Section */}
-                <section className="mt-20">
-                    <h2 className="text-3xl font-bold text-white mb-8">ทำไมต้องใช้ Content Factory?</h2>
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <FeatureCard 
-                            icon={Sparkles} 
-                            title="สคริปต์ไวรัล" 
-                            description="AI วิเคราะห์เทรนด์และสร้าง Hook ที่ดึงดูดผู้ชมให้หยุดดูคลิปของคุณทันที"
+                    <div className="space-y-4">
+                        
+                        {/* Google Login (แก้ไข onClick) */}
+                        <LoginSocialButton 
+                            onClick={onGoogleLogin} // 🔑 เรียกใช้ prop ที่เชื่อมต่อกับ Firebase
+                            icon={Google} 
+                            providerName="Google" 
                         />
-                        <FeatureCard 
-                            icon={Smartphone} 
-                            title="พร้อมถ่ายทำ" 
-                            description="แบ่งฉาก (Shot), Audio, Visual, และ Text-on-Screen ครบถ้วนตามมาตรฐาน TikTok/Reels"
+                        
+                        {/* ... ปุ่มอื่นๆ (ถ้ากดจะ alert เหมือนเดิม) ... */}
+                        
+                        <LoginSocialButton 
+                            onClick={() => alert('Feature not implemented yet.')} 
+                            icon={Mic}
+                            providerName="TikTok" 
                         />
-                        <FeatureCard 
-                            icon={Clock} 
-                            title="ประหยัดเวลา" 
-                            description="สร้าง 10 คลิปในเวลาไม่ถึง 2 นาที ไม่ต้องนั่งคิดจนหัวหมุนอีกต่อไป"
-                        />
+                        
+                        {/* ... ปุ่มที่เหลือ ... */}
                     </div>
-                </section>
-                
-                {/* Footer */}
-                <footer className="mt-20 border-t border-gray-800 pt-8">
-                    <p className="text-sm text-gray-500">
-                        Powered by Gemini AI. &copy; {new Date().getFullYear()} Content Factory.
-                    </p>
-                </footer>
+
+                    {/* ... ส่วน Email Input และ Continue Button ... */}
+
+                </div>
             </div>
         </div>
     );
-};
+}
 
-export default LandingPage;
+// 💡 ต้องเพิ่ม propTypes หรือ Export ที่ถูกต้องสำหรับ App.jsx
